@@ -1,11 +1,22 @@
 {
   "name": "easelog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An easy logging solution that saves to a file and displays on the console.",
   "main": "dist/index.js",
   "type": "module",
   "types": "dist/index.d.ts",
-  "keywords": ["log","logger","electron", "logging", "node", "windows","mac", "osx", "linux", "desktop"],
+  "keywords": [
+    "log",
+    "logger",
+    "electron",
+    "logging",
+    "node",
+    "windows",
+    "mac",
+    "osx",
+    "linux",
+    "desktop"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
