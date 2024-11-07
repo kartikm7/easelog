@@ -38,3 +38,6 @@ Logger(path:string|undefined)
 saveToFile(message: string, type:logType, location: string | undefined, path: string | undefined)
 ```
 `location` and `path` are **optional**.
+
+## More info
+`EaseLog` does not support commonjs
