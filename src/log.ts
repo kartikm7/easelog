@@ -8,7 +8,7 @@ export function saveToFile(message: string, type:logType, location: string | und
   let [date, time] = new Date().toISOString().split('T')
   time = time.slice(0,8)
   const writeStream = createWriteStream(join(path, date+".log"),{flags: "a"})
-  writeStream.end(`${date} ${time} [${type}] ${message}${location ? ": "+location : ""}`)
+  writeStream.end(`${date} ${time} [${type}] ${message}${location ? ": "+location : ""} \n`)
   writeStream.close()
   return
 }
