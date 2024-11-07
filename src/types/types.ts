@@ -1,1 +1,1 @@
-type logType = "log" | "warn" | "error" | "debug"
+type logType = "INFO" | "WARN" | "ERROR" | "DEBUG"
