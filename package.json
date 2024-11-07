@@ -1,5 +1,5 @@
 {
-  "name": "quicklog",
+  "name": "easelog",
   "version": "1.0.0",
   "description": "An easy logging solution that saves to a file and displays on the console.",
   "main": "dist/index.js",
