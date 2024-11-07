@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "types": "dist/index.d.ts",
+  "keywords": ["log","logger","electron", "logging", "node", "windows","mac", "osx", "linux", "desktop"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
