@@ -22,7 +22,7 @@ async function welcome(): Promise<void> {
 program
   .name('easelog')
   .description('CLI to copy easelog for easier customization!')
-  .version('1.0.2')
+  .version('1.0.3')
 
 program
   .command('init [destination]')
