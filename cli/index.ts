@@ -7,6 +7,7 @@ import path from "node:path";
 import { createSpinner } from "nanospinner";
 import { downloadFile } from "./utils/download-file.js";
 import { existsSync, mkdirSync } from "node:fs";
+import { confirm, input } from '@inquirer/prompts';
 
 const program = new Command();
 
@@ -30,30 +31,49 @@ program
   .action(async (destination: string) => {
     // a nice little greeting
     await welcome()
-    // loading spinner
-    const spinner = createSpinner(' Downloading logger.ts from the repository...').start()
+
     // getting the path of the current working directory
     let location = process.cwd()
-    // checking whether the user entered the path or not exists or not
+
+    // checking whether the user entered the path or not
     if (destination) location = path.join(location, destination)
+
+    // asking the user whether they want to create a sub-directory
+    const createDir = await confirm({ message: 'Do you want to create a sub directory?' })
+    let nameDir
+    if (createDir) {
+      nameDir = await input({ message: 'Name of the sub-directory: ', default: 'easelog' })
+      location = path.join(location, nameDir) // updating the location path
+      // create directory if it does not exist
+      if(!existsSync(location)) mkdirSync(location, {recursive: true})
+    }
+
+    // loading spinner
+    const spinner = createSpinner(' Downloading logger.ts from the repository...').start()
+
     // downloading the latest index.ts for the
     let res = await downloadFile('https://raw.githubusercontent.com/kartikm7/easelog/refs/heads/master/src/log.ts', 'logger.ts', location)
+
     // incase the download fails
-    if (!res){
+    if (!res) {
       spinner.error(' Something went wrong :/')
-      process.exit(1)      
+      process.exit(1)
     }
     spinner.update(' Downloading types.ts from the repository...')
-    // downloading the latest types.ts, also creates a new directory called types in which its stored
-    if(!existsSync(path.join(location,'types'))) mkdirSync(path.join(location,'types')) // incase types directory does not exist
+
+    // incase the types directory does not exist
+    if (!existsSync(path.join(location, 'types'))) mkdirSync(path.join(location, 'types'))
+
+    // downloading the latest types.ts
     res = await downloadFile('https://raw.githubusercontent.com/kartikm7/easelog/refs/heads/master/src/log.ts', 'types.ts', path.join(location, 'types'))
+
     // incase the download fails
-    if (!res){
+    if (!res) {
       spinner.error(' Something went wrong :/')
-      process.exit(1)      
+      process.exit(1)
     }
 
     spinner.success(' Easelog has been setup in your project, enjoy logging!')
   })
 
-  program.parse()
+program.parse()
