@@ -7,6 +7,8 @@ import { createSpinner } from "nanospinner";
 import { downloadFile } from "./utils/download-file.js";
 import { existsSync, mkdirSync } from "node:fs";
 import { confirm, input } from '@inquirer/prompts';
+import { exec } from "node:child_process";
+import chalk from "chalk";
 const program = new Command();
 async function welcome() {
     await new Promise(resolve => figlet("Easelog", (err, msg) => {
@@ -20,7 +22,7 @@ async function welcome() {
 program
     .name('easelog')
     .description('CLI to copy easelog for easier customization!')
-    .version('1.0.3');
+    .version('1.0.4');
 program
     .command('init [destination]')
     .description('clone logger.ts in your project; default destination is the current working directory')
@@ -32,6 +34,7 @@ program
     // checking whether the user entered the path or not
     if (destination)
         location = path.join(location, destination);
+    console.log(chalk.bgYellow(' Important: run this command in the root of your project!'));
     // asking the user whether they want to create a sub-directory
     const createDir = await confirm({ message: ' Do you want to create a sub directory?' });
     let nameDir;
@@ -62,6 +65,19 @@ program
         spinner.error(' Something went wrong :/');
         process.exit(1);
     }
+    spinner.update(" Installing dependencies...");
+    await new Promise((resolve, reject) => {
+        exec("npm i chalk", (err, stdout, stderr) => {
+            // incase it fails, we are exiting the cli
+            if (err) {
+                spinner.error({ text: String(err) });
+                reject(err);
+                process.exit(1);
+            }
+            // incase it does not fail we move onto the next step
+            resolve();
+        });
+    });
     spinner.success(' Easelog has been setup in your project, enjoy logging!');
 });
 program.parse();
