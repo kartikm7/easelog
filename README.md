@@ -45,5 +45,16 @@ saveToFile(message: string, type:logType, location: string | undefined, path: st
 ```
 `location` and `path` are **optional**.
 
+## EaseLog CLI
+**Usage**: `easelog [options] [command]`
+
+**Options**:
+  - `-V`, `--version`       output the version number
+  - `-h`, `--help`          display help for command
+
+**Commands**:
+  - `init [destination]`  clone logger.ts in your project;  default destination is the current working directory
+  - `help [command]`      display help for command
+
 ## More info
 `EaseLog` does not support commonjs
