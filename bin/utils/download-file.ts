@@ -15,6 +15,7 @@ export async function downloadFile(url: string, fileName: string, destination: s
     })
     return true
   } catch (error) {
+    console.error(error)
     return false
   }
 }
