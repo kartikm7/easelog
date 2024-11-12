@@ -14,6 +14,7 @@ async function welcome() {
         resolve();
     }));
     console.log(mind(' An easy logging solution that saves to a file and displays on the console.'));
+    console.log(mind(' https://www.github.com/kartikm7/easelog'));
     console.log();
 }
 program
@@ -32,10 +33,10 @@ program
     if (destination)
         location = path.join(location, destination);
     // asking the user whether they want to create a sub-directory
-    const createDir = await confirm({ message: 'Do you want to create a sub directory?' });
+    const createDir = await confirm({ message: ' Do you want to create a sub directory?' });
     let nameDir;
     if (createDir) {
-        nameDir = await input({ message: 'Name of the sub-directory (default: easelog): ', default: 'easelog' });
+        nameDir = await input({ message: ' Name of the sub-directory: ', default: 'easelog' });
         location = path.join(location, nameDir); // updating the location path
         // create directory if it does not exist
         if (!existsSync(location))
