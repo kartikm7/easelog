@@ -4,7 +4,7 @@
 ## Installation
 ### Recommended (for Typescript projects)
 ```bash
-npx easelog init [destination]
+npx easelog init
 ```
 The `easelog init` cli command downloads just the `logger.ts` and `types.ts` file. The best part about this is it allows you to make the project yours, you can adjust the logger the way you feel appropriate. If you do end up doing something you feel would help others, consider contributing!
 ### Conventional (for Javascript projects)
